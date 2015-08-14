@@ -1,0 +1,14 @@
+- if current_user
+  = button_to "Refresh", root_path, :method => :get
+  %h1= t :emails
+  %table= render partial:'email', collection: @emails
+  %br/
+  = will_paginate @emails
+  %p= link_to (t :log_out), logout_path
+- else
+  %h1 TestProject
+  %p
+    %strong= t :sign_in
+  %a.auth_provider{:href => "/auth/google_oauth2"}
+    = image_tag "google_apps_64.png", size: "64x64", alt: "Google"
+    Google

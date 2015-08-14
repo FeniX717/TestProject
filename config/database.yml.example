@@ -1,0 +1,16 @@
+development:
+  adapter: postgresql
+  database: TestProject_dev
+  pool: 5
+  timeout: 5000
+  username: ****
+  password: ****
+
+
+test:
+  adapter: postgresql
+  database: TestProject_test
+  pool: 5
+  timeout: 5000
+  username: ****
+  password: ****
