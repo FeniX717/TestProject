@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 
   def create
     user = User.from_omniauth(env["omniauth.auth"])
-    #user.refresh_token_if_expired    It's method for refresh user token
+    user.refresh_token_if_expired user.refresh_token if user.refresh_token!=nil
     #GetEmails.perform_async(user.id)  It's method for async get email
     user.get_emails  #It's method for sync emails
     @emails = Email.where(user_id: user.id).paginate(page: params[:page], per_page: 50)

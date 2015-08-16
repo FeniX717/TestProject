@@ -1,28 +1,25 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+For installation this project:
 
-Things you may want to cover:
+1. Log in in your browser in your google-account.
+2. Go https://console.developers.google.com/start
+3. Select "Enable Google APIs for use in your apps" and create project with name you like
+4. In APIs turn on "Analytics API" and "Gmail API"
+5. Go to "Credentials" select "add Credentials" and choose "OAuth 2.0 Client ID"
+6. Select "Configure consent screen", fill in information and "Save"
+7. Select Web Application and fill in 
+   Authorized JavaScript origins: http://localhost:3000
+   Authorized redirect URIs: http://localhost:3000/auth/google_oauth2/callback
+8. Choose "Create"and get your Client ID, and Client secret
+9. Add information of Client ID in MyTest->config->secrets.yml "app_id"
+10.Add information of Client secret in MyTest->config->secrets.yml "app_secret"
+11. Save secrets.yml
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+If next time goole will ask you some permission accept with all
 
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+
+
+
+

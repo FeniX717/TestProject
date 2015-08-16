@@ -1,5 +1,5 @@
 - if current_user
-  = button_to "Refresh", root_path, :method => :get
+  = button_to "Refresh", email_path(id: current_user.id), :method => :put
   %h1= t :emails
   %table= render partial:'email', collection: @emails
   %br/

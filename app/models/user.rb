@@ -1,4 +1,4 @@
-require 'rest-client'
+require 'pry'
 
 class User < ActiveRecord::Base
   has_many :emails
@@ -26,25 +26,10 @@ class User < ActiveRecord::Base
     imap.search(['ALL']).each do |message_id|
       msg = imap.fetch(message_id,'RFC822')[0].attr['RFC822']
       mail = Mail.read_from_string msg
-      Email.create(:user_id => self.id, :subject => mail.subject.to_s, :text_part => mail.text_part,
-      :from => mail.from.to_s, :to => mail.to.to_s, :date => mail.date )
-    end
-  end
-
-
-  def refresh_token_if_expired
-    if token_expired?
-      response = RestClient.post "https://accounts.google.com/o/oauth2/token", :grant_type => 'refresh_token', :refresh_token => self.refresh_token, :client_id => "#{Rails.application.secrets.app_id}",
-      :client_secret => "#{Rails.application.secrets.app_secret}", refreshhash = JSON.parse(response.body)
-
-      token_will_change!
-      expiresat_will_change!
-
-      self.access_token     = refreshhash['access_token']
-      self.access_expires_at = DateTime.now + refreshhash["expires_in"].to_i.seconds
-
-      self.save
-      puts 'Saved'
+      unless Email.find_by_message_id(mail.message_id)
+        Email.create(:user_id => self.id, :subject => mail.subject.to_s, :text_part => mail.text_part,
+        :from => mail.from.to_s, :to => mail.to.to_s, :date => mail.date, :message_id => mail.message_id)
+      end
     end
   end
 
@@ -56,4 +41,23 @@ class User < ActiveRecord::Base
     false 
   end
 
+  def refresh_token_if_expired(refresh_token)
+    if token_expired?
+      data = {
+        :client_id => "#{Rails.application.secrets.app_id}",
+        :client_secret => "#{Rails.application.secrets.app_secret}",
+        :refresh_token => refresh_token,
+        :grant_type => "refresh_token"
+      }
+      @response = ActiveSupport::JSON.decode(RestClient.post "https://accounts.google.com/o/oauth2/token", data)
+      if @response["access_token"].present?
+        self.access_token = @response['access_token']
+        self.access_expires_at = DateTime.now + @response["expires_in"].to_i.seconds
+        self.save
+        puts 'Saved'
+      else
+        puts "Unsaved"
+      end
+    end
+  end
 end
