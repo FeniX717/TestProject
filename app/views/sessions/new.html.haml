@@ -1,9 +1,15 @@
 - if current_user
-  = button_to "Refresh", email_path(id: current_user.id), :method => :put
-  %h1= t :emails
-  %table= render partial:'email', collection: @emails
+  = button_to "Refresh", email_path(id: current_user.id), :class => "btn btn-large btn-primary",:style => "float: center",  :method => :put
+  %table.table-hover.center
+    %caption= t :emails
+    %tr.table_header
+      %th= t :subject
+      %th= t :from
+      %th= t :date
+    %tbody
+      = render partial:'email', collection: @emails
   %br/
-  = will_paginate @emails
+  = will_paginate @emails, :renderer => BootstrapPagination::Rails
   %p= link_to (t :log_out), logout_path
 - else
   %h1 TestProject

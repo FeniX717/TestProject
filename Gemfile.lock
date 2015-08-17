@@ -227,11 +227,14 @@ GEM
     whenever (0.9.4)
       chronic (>= 0.6.3)
     will_paginate (3.0.7)
+    will_paginate-bootstrap (1.0.1)
+      will_paginate (>= 3.0.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  autoprefixer-rails
   bootstrap-sass
   byebug
   coffee-rails (~> 4.1.0)
@@ -243,6 +246,7 @@ DEPENDENCIES
   jquery-rails
   kaminari
   mail
+  omniauth
   omniauth-google-oauth2
   pg
   pry-byebug
@@ -258,3 +262,4 @@ DEPENDENCIES
   web-console (~> 2.0)
   whenever
   will_paginate
+  will_paginate-bootstrap

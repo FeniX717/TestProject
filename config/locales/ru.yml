@@ -4,3 +4,6 @@ ru:
   create_account: "Создать аккаунт"
   log_out: "Выйти"
   emails: "Ваши письма"
+  subject: "Тема"
+  from: "От кого"
+  date: "Дата"

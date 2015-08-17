@@ -4,3 +4,6 @@ en:
   create_account: "Create an account"
   log_out: "Log out"
   emails: "User emails"
+  subject: "Subject"
+  from: "From"
+  date: "Date"
