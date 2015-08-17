@@ -1,6 +1,7 @@
 class GetEmails
-   include Sidekiq::Worker
-  def get_emails 
+  include Sidekiq::Worker
+  def perform user_id
+    user = User.find_by(user_id)
     imap = Net::IMAP.new('imap.gmail.com', 993, true)
     imap.authenticate('XOAUTH2', self.email, self.access_token)
     imap.select('INBOX')
