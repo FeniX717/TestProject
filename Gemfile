@@ -14,10 +14,6 @@ group :development do
   gem 'turbolinks'
   gem 'jbuilder', '~> 2.0'
   gem 'web-console', '~> 2.0'
-  gem 'omniauth'
-  gem 'gmail_xoauth'
-  gem 'mail'
-  gem 'omniauth-google-oauth2'
   gem 'rails-i18n'
   gem 'will_paginate'
   gem 'will_paginate-bootstrap'
@@ -34,6 +30,14 @@ group :test do
   gem 'pry-byebug'
   gem 'byebug'
   gem 'database_cleaner'
+  gem 'faker'
+end
+
+group :development, :test do
+  gem 'omniauth'
+  gem 'gmail_xoauth'
+  gem 'mail'
+  gem 'omniauth-google-oauth2'
 end
 
 

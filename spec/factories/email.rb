@@ -4,6 +4,6 @@ FactoryGirl.define do
     text_part "Tests for project"
     from { Faker::Internet.email }
     to { Faker::Internet.email }
-    date
+    date { Time.now }
   end
 end
