@@ -1,17 +1,26 @@
-!!!
 %html
   %head
     %title OmniAuth Example
     = stylesheet_link_tag    "application"
     = javascript_include_tag "application"
     = csrf_meta_tag
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
   %body
-  %align>
-    #container.container-fluid.content
-      - flash.each do |name, msg|
-        = content_tag :div, msg, :id => "flash_#{name}"
-      %p
-        = link_to_unless I18n.locale == :en, "English", locale: :en
-        |
-        \#{link_to_unless I18n.locale == :ru, "Russian", locale: :ru}
-      = yield
+    .container
+      .row
+        %div{:class => "span12"}
+          - flash.each do |name, msg|
+            = content_tag :div, msg, :id => "flash_#{name}"
+          .row
+            %div{:class => "span1"}
+              = link_to_unless I18n.locale == :en, "English", locale: :en
+              |
+              \#{link_to_unless I18n.locale == :ru, "Russian", locale: :ru}
+            %div{:class => "span1 "}
+              - if session[:user_id]
+                = link_to (t :log_out), logout_path
+              - else
+                %strong= t :sign_in
+          = yield
+
+

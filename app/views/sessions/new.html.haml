@@ -1,6 +1,6 @@
 - if current_user
   = button_to "Refresh", email_path(id: current_user.id), :class => "btn btn-large btn-primary",:style => "float: center",  :method => :put
-  %table.table-hover.center
+  %table.table-condensed
     %caption= t :emails
     %tr.table_header
       %th= t :subject
@@ -10,11 +10,8 @@
       = render partial:'email', collection: @emails
   %br
   = will_paginate @emails, :renderer => BootstrapPagination::Rails
-  %p= link_to (t :log_out), logout_path
 - else
   %h1 TestProject
-  %p
-    %strong= t :sign_in
   %a.auth_provider{:href => "/auth/google_oauth2"}
     = image_tag "google_apps_64.png", size: "64x64", alt: "Google"
     Google
