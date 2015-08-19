@@ -1,7 +1,7 @@
 class SessionsController < ApplicationController
   def new
     @emails = Email.where(user_id: current_user.id).paginate(page:
-    params[:page], per_page: 50) if current_user 
+    params[:page], per_page: 50) if current_user
   end
 
   def create

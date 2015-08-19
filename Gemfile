@@ -5,9 +5,7 @@ gem 'pg'
 
 group :development do
   gem 'sass-rails', '~> 5.0'
-  gem 'twitter-bootstrap-rails'
-  gem 'therubyracer'
-  gem 'less-rails'
+  gem 'bootstrap-sass'
   gem 'autoprefixer-rails'
   gem 'uglifier', '>= 1.3.0'
   gem 'coffee-rails', '~> 4.1.0'
